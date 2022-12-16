@@ -109,6 +109,39 @@ class LinkedList{
         }
         return index;
     }
+
+    toString(){
+        if (this.size()===0) return 
+        let string="";
+        let currentNode=this;
+        while (currentNode.next!==null){
+            string+=`(${currentNode.value}) -> `;
+            currentNode=currentNode.next;
+        }
+        return string + `(${currentNode.value}) -> null`
+    }
+
+    insertAt(value,index){
+        if (index===0) return this.prepend(value);
+        let newNode = new Node(value);
+        let nodeAtIndex = this.at(index);
+        newNode.next=nodeAtIndex;
+        let nodeBehindIndex = this.at(index-1);
+        nodeBehindIndex.next = newNode;
+    }
+
+    removeAt(index){
+        if (index===this.size()-1) return this.pop();
+        if (index===0){
+            let nodeOne=this.at(1);
+            this.value=nodeOne.value;
+            this.next = nodeOne.next;
+            return
+        }
+        let nodeBehindIndex=this.at(index-1);
+        let nodeAfterIndex=this.at(index+1);
+        nodeBehindIndex.next=nodeAfterIndex;
+    }
 }
 
 let testList= new LinkedList();
